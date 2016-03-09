@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Language" content="es">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>@ViewData["Title"] - TiceWEB</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />-->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+        <!--
+        <link rel="stylesheet" href="~/css/site.css" />
+        -->
+        <link rel="stylesheet" type="text/css" href="~/Recursos/css/fuentes.css">
+        <!-- regular -->
+        <link rel="stylesheet" href="~/Recursos/css/main.min.css">
+        <!-- print -->
+        <link rel="stylesheet" href="~/Recursos/css/main_print.css" media="print">
+        <link rel="stylesheet" href="~/Recursos/css/styles.css">
+        <link rel="stylesheet" href="~/Recursos/css/main.css">
+        <link rel="stylesheet" href="~/Recursos/css/nav-main.css">
+
+        @RenderSection("styles", required: false)
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+              asp-fallback-href="~/Content/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/Recursos/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+</head>
+<body>
+    <div class="site-wrapper clearfix">
+
+        @Html.Partial("_Menu")
+
+        @RenderBody()
+    </div>
+    <environment names="Development">
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        @*<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Recursos/js/site.js" asp-append-version="true"></script>
+        <script src="~/Recursos/js/script.js"></script>
+
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/Scripts/jquery-1.10.2.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/Content/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/Recursos/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
