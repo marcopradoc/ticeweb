@@ -70,6 +70,50 @@ function irCrearCapa() {
     }
 }
 
+function cargarTalleres() {
+    var _url = 'http://localhost:49492/api/Taller';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codigoTaller + "'>" + data.nombreTaller + "</option>";
+            });
+            //alert("Hola.");
+            $("#selectCapaTaller").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+function cargarPeriodos() {
+    var _url = 'http://localhost:49492/api/Periodo';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectCapaPeriodo").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+
 $(document).ready(function () {
     $('#btnBuscarCapa').on('click', buscarCapacitaciones);
+    cargarTalleres();
+    cargarPeriodos();
 });

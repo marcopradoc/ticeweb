@@ -45,6 +45,7 @@ function guardarCapa(event) {
             // Check for successful (blank) response
             var codigoCapacitacion = parseInt(response);
             if (codigoCapacitacion > 0) {
+                alert(codigoCapacitacion);
                 $('input#codigoCapa').val(''+codigoCapacitacion);
                 // Clear the form inputs
                 /*
@@ -129,20 +130,42 @@ function cargarCapacitacion() {
     }
 }
 
+function cargarPeriodos() {
+    var _url = 'http://localhost:49492/api/Periodo';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectCapaPeriodo").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+
 $(document).ready(function () {
     $("#inputCapaFechaCapa").datepicker({ dateFormat: "dd/mm/yy" });
     $("#inputCapaFechaInicio").datepicker({ dateFormat: "dd/mm/yy" });
-
     $('#btnGuardarCapacitacion').on('click', guardarCapa);
-
+    
     $('.spinner .btn:first-of-type').on('click', function () {
         $('.spinner input').val(parseInt($('.spinner input').val(), 10) + 1);
     });
     $('.spinner .btn:last-of-type').on('click', function () {
         $('.spinner input').val(parseInt($('.spinner input').val(), 10) - 1);
     });
+    
     $('#btnCancelar').on('click', cancelar);
-
+    
     cargarCapacitacion();
-
+    cargarPeriodos();
 });

@@ -281,8 +281,8 @@ function editarTarea(event) {
 }
 
 $(document).ready(function () {
-    //$("#inputTareaFecIni").datepicker({ dateFormat: "dd/mm/yy" });
-    //$("#inputTareaFecFin").datepicker({ dateFormat: "dd/mm/yy" });
+    $("#inputTareaFecIni").datepicker({ dateFormat: "dd/mm/yy" });
+    $("#inputTareaFecFin").datepicker({ dateFormat: "dd/mm/yy" });
     // Add Team button click
     $('#btnGuardarDocumento').on('click', guardarDocumento);
     $('#btnEditarTarea').on('click', editarTarea);    

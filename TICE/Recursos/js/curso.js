@@ -288,8 +288,8 @@ function cargarPeriodos() {
 }
 
 $(document).ready(function () {
-    //$("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
-    //$("#datepicker2").datepicker({ dateFormat: "dd/mm/yy" });
+    $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
+    $("#datepicker2").datepicker({ dateFormat: "dd/mm/yy" });
     // Add Team button click
     $('#btnGuardarActividad').on('click', guardarActividad);
     $('#btnEditarCurso').on('click', editarCurso);
