@@ -4,17 +4,19 @@ function isEmpty(str) {
 
 function buscarCapacitaciones() {
     jQuery.support.cors = true;
-    var codigoTaller = $('select#selectCapaTaller').val();
+    //var codigoTaller = $('select#selectCapaTaller').val();
     var codigoPeriodo = $('select#selectCapaPeriodo').val();
     var nombreCapacitacion = $('input#inputCapaNombre').val();
-    if (isEmpty(codigoTaller)) {
-        alert('Debe seleccionar un taller');
-    } else if (isEmpty(codigoPeriodo)) {
-        alert('Debe seleccionar un periodo');
+    //if (isEmpty(codigoTaller)) {
+    //    alert('Debe seleccionar un taller');
+    //} else if (isEmpty(codigoPeriodo)) {
+    if (isEmpty(codigoPeriodo)) {
+        notie.alert(1, 'Debe seleccionar un periodo', 2);
     }
-    if (!isEmpty(codigoTaller) && !isEmpty(codigoPeriodo)) {
+    //if (!isEmpty(codigoTaller) && !isEmpty(codigoPeriodo)) {
+    if (!isEmpty(codigoPeriodo)) {
         $.ajax({
-            url: 'http://localhost:49492/api/Capacitacion?codigoTaller=' + codigoTaller + '&codigoPeriodo=' + codigoPeriodo + '&nombreCapacitacion=' + nombreCapacitacion,
+            url: 'http://localhost:49492/api/Capacitacion?codigoPeriodo=' + codigoPeriodo + '&nombreCapacitacion=' + nombreCapacitacion,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -33,10 +35,7 @@ function WriteResponse(capas) {
     $.each(capas, function (index, capa) {
         strResult += '<tr rel="' + capa.codigoCapacitacion + '">';
         strResult += '<td> ' + capa.nombre + '</td>';
-        strResult += '<td>' + capa.nombreTaller + '</td>';
-        strResult += '<td>' + capa.capacitacionActiva + '</td>';
         strResult += '<td>' + capa.periodo + '</td>';
-        strResult += '<td>' + capa.fechaCapacitacion + '</td>';
         strResult += '<td></td>';//estado
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" data-rel="' + capa.codigoCapacitacion + '">'
@@ -114,6 +113,6 @@ function cargarPeriodos() {
 
 $(document).ready(function () {
     $('#btnBuscarCapa').on('click', buscarCapacitaciones);
-    cargarTalleres();
+    //cargarTalleres();
     cargarPeriodos();
 });

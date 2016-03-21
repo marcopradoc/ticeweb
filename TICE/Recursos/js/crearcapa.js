@@ -16,18 +16,18 @@ function guardarCapa(event) {
 
         var editActividad = {
             'nombre': $('#guardarCapacitacion input#inputCapaNombre').val(),
-            'certificado': $('#guardarCapacitacion input#inputCapaCertificado').val(),
+            //'certificado': $('#guardarCapacitacion input#inputCapaCertificado').is(':checked'),
             'codigoPerido': $('#guardarCapacitacion select#selectCapaPeriodo').val(),
-            'codigoTaller': '2',
+            //'codigoTaller': '2',
             'descripcion': $('#guardarCapacitacion textarea#textareaCapaDescripcion').val(),
-            'capacitacionActiva': $('#guardarCapacitacion input#inputCapaActivo').val(),
-            'lugar': $('#guardarCapacitacion input#inputCapaLugar').val(),
-            'fechaCapacitacion': $('#guardarCapacitacion input#inputCapaFechaCapa').val(),
-            'hora': $('#guardarCapacitacion input#inputCapaHora').val(),
+            'capacitacionActiva': $('#guardarCapacitacion input#inputCapaActivo').is(':checked'),
+            //'lugar': $('#guardarCapacitacion input#inputCapaLugar').val(),
+            //'fechaCapacitacion': $('#guardarCapacitacion input#inputCapaFechaCapa').val(),
+            //'hora': $('#guardarCapacitacion input#inputCapaHora').val(),
             'correoContacto': $('#guardarCapacitacion input#inputCapaCorreo').val(),
-            'enviarNotificacion': $('#guardarCapacitacion input#inputCapaEnviarNoti').val(),
+            'enviarNotificacion': $('#guardarCapacitacion input#inputCapaEnviarNoti').is(':checked'),
             'periodicidadEnvio': $('#guardarCapacitacion input#inputCapaPeriodicidad').val(),
-            'fechaInicioEnvio': $('#guardarCapacitacion input#inputCapaFechaInicio').val(),
+            //'fechaInicioEnvio': $('#guardarCapacitacion input#inputCapaFechaInicio').val(),
             'usuarioCreacion': 'admin'
         }
 
@@ -45,7 +45,7 @@ function guardarCapa(event) {
             // Check for successful (blank) response
             var codigoCapacitacion = parseInt(response);
             if (codigoCapacitacion > 0) {
-                alert(codigoCapacitacion);
+                //alert(codigoCapacitacion);
                 $('input#codigoCapa').val(''+codigoCapacitacion);
                 // Clear the form inputs
                 /*
@@ -62,7 +62,7 @@ function guardarCapa(event) {
         });
     } else {
         // If errorCount is more than 0, error out
-        alert('Por favor, ingresar todos los campos');
+        notie.alert(1, 'Por favor, ingresar todos los campos', 2);
         return false;
     }
 }
@@ -110,17 +110,17 @@ function cargarCapacitacion() {
             success: function (data) {
                 $.each(data, function (index, capa) {
                     $('input#inputCapaNombre').val(capa.nombre);
-                    $('input#inputCapaCertificado').val(capa.certificado);
                     $('select#selectCapaPeriodo').val(capa.codigoPerido);
                     $('textarea#textareaCapaDescripcion').val(capa.descripcion);
-                    $('input#inputCapaActivo').val(capa.capacitacionActiva);
-                    $('input#inputCapaLugar').val(capa.lugar);
-                    $('input#inputCapaFechaCapa').val(capa.fechaCapacitacion);
-                    $('input#inputCapaHora').val(capa.horaCapacitacion);
+                    //$('input#inputCapaLugar').val(capa.lugar);
+                    //$('input#inputCapaFechaCapa').val(capa.fechaCapacitacion);
+                    //$('input#inputCapaHora').val(capa.horaCapacitacion);
                     $('input#inputCapaCorreo').val(capa.correoContacto);
-                    $('input#inputCapaEnviarNoti').val(capa.enviarNotificacion);
                     $('input#inputCapaPeriodicidad').val(capa.periodicidadEnvio);
-                    $('input#inputCapaFechaInicio').val(capa.fechaInicioEnvio);
+                    //$('input#inputCapaFechaInicio').val(capa.fechaInicioEnvio);
+                    //$('input#inputCapaCertificado').val(capa.certificado);
+                    $('input#inputCapaActivo').prop('checked', capa.capacitacionActiva);
+                    $('input#inputCapaEnviarNoti').prop('checked', capa.enviarNotificacion);
                 });
             },
             error: function (x, y, z) {
@@ -153,8 +153,8 @@ function cargarPeriodos() {
 }
 
 $(document).ready(function () {
-    $("#inputCapaFechaCapa").datepicker({ dateFormat: "dd/mm/yy" });
-    $("#inputCapaFechaInicio").datepicker({ dateFormat: "dd/mm/yy" });
+    //$("#inputCapaFechaCapa").datepicker({ dateFormat: "dd/mm/yy" });
+    //$("#inputCapaFechaInicio").datepicker({ dateFormat: "dd/mm/yy" });
     $('#btnGuardarCapacitacion').on('click', guardarCapa);
     
     $('.spinner .btn:first-of-type').on('click', function () {
