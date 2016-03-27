@@ -23,21 +23,19 @@ function WriteResponse(tareas) {
     var strResult = '';
     //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
     $.each(tareas, function (index, tarea) {
-        strResult += '<tr rel="' + tarea.codigoTarea + '">';
-        strResult += '<td>' + tarea.codigoTarea + '</td>';
+        strResult += '<tr rel="' + tarea.codTarea + '">';
+        strResult += '<td>' + tarea.codTarea + '</td>';
         strResult += '<td> ' + tarea.titulo + '</td>';
         strResult += '<td>' + tarea.fechaCreacion + '</td>';
-        strResult += '<td>' + tarea.codigoPrioridad + '</td>';
-        strResult += '<td></td>';//estado
-        strResult += '<td></td>';//avance
+        strResult += '<td>' + tarea.porcentajeCompletado + '</td>';
         strResult += '<td></td>';//asignado
         strResult += '<td>' + tarea.fechaInicio + '</td>';
         strResult += '<td>' + tarea.fechaFin + '</td>';
         strResult += '<td>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditTarea" data-rel="' + tarea.codigoTarea + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditTarea" data-rel="' + tarea.codTarea + '">'
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'
         strResult += '</button>'
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelTarea" data-rel="' + tarea.codigoTarea + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelTarea" data-rel="' + tarea.codTarea + '">'
         strResult += '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
         strResult += '</button>'
         strResult += '</td></tr>';
@@ -78,11 +76,11 @@ function bindNuevoDocumento() {
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (index, tarea) {
-                        $('input#inputDocCursoCodigo').val(tarea.codigoCurso);
+                        $('input#inputDocCursoCodigo').val(tarea.codCurso);
                         $('input#inputDocCursoNombre').val(tarea.Curso);
-                        $('input#inputDocActividadCodigo').val(tarea.codigoActividad);
+                        $('input#inputDocActividadCodigo').val(tarea.codActividad);
                         $('input#inputDocActividadNombre').val(tarea.Actividad);
-                        $('input#inputDocTareaCodigo').val(tarea.codigoTarea);
+                        $('input#inputDocTareaCodigo').val(tarea.codTarea);
                         $('input#inputDocTareaNombre').val(tarea.titulo);
                     });
                 },
@@ -122,16 +120,16 @@ function bindEditarTarea() {
                 success: function (data) {
                     $.each(data, function (index, tarea) {
                         $('#inputTareaNombreCurso').val(tarea.Curso);
-                        $('#inputTareaCodigoCurso').val(tarea.codigoCurso);
+                        $('#inputTareaCodigoCurso').val(tarea.codCurso);
                         $('#inputTareaNombreActividad').val(tarea.Actividad);
-                        $('#inputTareaCodigoActividad').val(tarea.codigoActividad);
-                        $('#inputTareaCodigoTarea').val(tarea.codigoTarea);
+                        $('#inputTareaCodigoActividad').val(tarea.codActividad);
+                        $('#inputTareaCodigoTarea').val(tarea.codTarea);
                         //
                         $('#inputTareaTitulo').val(tarea.titulo);
                         $('#selectTareaPrioridad').val('1');
                         $('#selectTareaEstado').val('1');
                         $('#inputTareaCompletado').val(tarea.porcentajeCompletado);
-                        $('#inputTareaAsignado').val(tarea.codigoRecurso);
+                        $('#inputTareaAsignado').val(tarea.codRecurso);
                         $('#textareaTareaDesc').val(tarea.descripcion);
                         $('#inputTareaFecIni').val(tarea.fechaInicio);
                         $('#inputTareaFecFin').val(tarea.fechaFin);

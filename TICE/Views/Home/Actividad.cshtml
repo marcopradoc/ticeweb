@@ -5,7 +5,7 @@
             <li id="tbCursos"><a asp-controller="Home" asp-action="Curso">Cursos</a></li>
             <li id="tbActividades" class="active"><a>Actividades</a></li>
             <li id="tbTareas" class="disabled"><a onclick="javascript:detTareas()">Tareas</a></li>
-            <li id="tbDocumentos" class="disabled"><a asp-controller="Home" asp-action="Documento">Documentos</a></li>
+            @*<li id="tbDocumentos" class="disabled"><a asp-controller="Home" asp-action="Documento">Documentos</a></li>*@
         </ul>
         <!-- inicio cuerpo-->
 
@@ -38,10 +38,10 @@
                 <thead>
                     <tr>
                         <th>Código</th>
+                        <th>Fecha</th>
+                        <th>Unidad</th>
+                        <th>Semana</th>
                         <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Inicio</th>
-                        <th>Fecha Fin</th>
                         <th>Avance</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -99,15 +99,6 @@
                         <div class="col-xs-8 form-group">
                             <input class="form-control" type="text" id="inputTareaCursoNombre" disabled/>
                             <input type="hidden" id="inputTareaCursoCodigo"/>
-                            <!--
-                            <select class="form-control" id="selectCurso">
-                                <option>Seleccione</option>
-                                <option value="1">Lógica</option>
-                                <option value="2">Aritmética</option>
-                                <option value="3">Algebra</option>
-                                <option value="4">Lenguaje</option>
-                            </select>
-                                -->
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Actividad :</label>
@@ -129,15 +120,13 @@
                             <input class="form-control" type="text" id="inputTitulo"/>
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>Prioridad :</label>
+                            <label>% Completado :</label>
                         </div>
                         <div class="col-xs-8 form-group">
-                            <select class="form-control" id="selectPrioridad">
-                                <option>Seleccione</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="inputCompletado">
+                                <span class="input-group-addon">%</span>
+                            </div>
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Estado :</label>
@@ -150,25 +139,22 @@
                             </select>
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>% Completado :</label>
+                            <label>Tipo Recurso :</label>
                         </div>
                         <div class="col-xs-8 form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="inputCompletado">
-                                <span class="input-group-addon">%</span>
-                            </div>
+                            <select class="form-control" id="selectTipoRecurso" disabled>
+                                @*<option>Seleccione</option>*@
+                                <option value="1">Docente</option>
+                                <option value="2">Proveedor</option>
+                                <option value="3">Coordinador</option>
+                                <option value="4">Supervisor</option>
+                            </select>
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>Asignado a :</label>
+                            <label>Nombre de Recurso :</label>
                         </div>
                         <div class="col-xs-8 form-group">
-                            <input class="form-control" type="text" id="inputAsignado"/>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label>Descripción :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <textarea class="form-control" rows="3" id="textareaDesc"></textarea>
+                            <input class="form-control" type="text" id="inputRecurso" value="Juan Tello"  disabled />
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Fecha Inicio :</label>
@@ -181,6 +167,12 @@
                         </div>
                         <div class="col-xs-8 form-group">
                             <input class="form-control" type="text" id="datepicker2">
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Descripción :</label>
+                        </div>
+                        <div class="col-xs-8 form-group">
+                            <textarea class="form-control" rows="3" id="textareaDesc"></textarea>
                         </div>
                     </div>
                 </form>

@@ -1,15 +1,11 @@
 ﻿
-@{
-    ViewBag.Title = "Cursos";
-}
-
 <div class="site-content">
     <div class="container-fluid">
         <ul class="nav nav-tabs">
             <li id="tbCursos" class="active"><a asp-controller="Home" asp-action="Curso">Cursos</a></li>
             <li id="tbActividades" class="disabled"><a onclick="javascript:detActividades()">Actividades</a></li>
             <li id="tbTareas" class="disabled"><a>Tareas</a></li>
-            <li id="tbDocumentos" class="disabled"><a>Documentos</a></li>
+            @*<li id="tbDocumentos" class="disabled"><a>Documentos</a></li>*@
         </ul>
         <h2>Listado de cursos</h2>
         <div class="panel panel-default">
@@ -55,11 +51,11 @@
             <table id="tblCursos" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Fecha</th>
-                        <th>Periodo</th>
                         <th>Modalidad</th>
+                        <th>Código</th>
+                        <th>Curso</th>
+                        <th>Fecha Registro</th>
+                        <th>Periodo</th>
                         <th>Docente Asignado</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -172,7 +168,7 @@
                             </select>
                             -->
                         </div>
-                        <div class="col-xs-4 form-group">
+                        @*<div class="col-xs-4 form-group">
                             <label>Tipo :</label>
                         </div>
                         <div class="col-xs-8 form-group">
@@ -181,34 +177,28 @@
                                 <option value="1">Presencial</option>
                                 <option value="2">Virtual</option>
                             </select>
+                        </div>*@
+                        <div class="col-xs-4 form-group">
+                            <label>Unidad :</label>
+                        </div>
+                        <div class="col-xs-8 form-group">
+                            <select class="form-control" id="selectUnidad">
+                                <option>Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Semana :</label>
+                        </div>
+                        <div class="col-xs-8 form-group">
+                            <select class="form-control" id="selectSemana">
+                                <option>Seleccione</option>
+                            </select>
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Titulo :</label>
                         </div>
                         <div class="col-xs-8 form-group">
                             <input class="form-control" type="text" id="inputTitulo" />
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label>Fecha Inicio :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <input class="form-control" type="text" id="datepicker1">
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label>Fecha Fin :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <input class="form-control" type="text" id="datepicker2">
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label>Sesión :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <select class="form-control" id="selectSesion">
-                                <option>Seleccione</option>
-                                <option value="1">Presencial</option>
-                                <option value="2">Virtual</option>
-                            </select>
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Estado :</label>

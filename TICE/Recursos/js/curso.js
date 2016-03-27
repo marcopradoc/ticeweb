@@ -105,7 +105,7 @@ function WriteResponse(cursos) {
     var strResult = '';
     //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
     $.each(cursos, function (index, cursos) {
-        strResult += '<tr rel="'+cursos.Codigo+'"><td>' + cursos.Codigo + '</td><td> ' + cursos.Curso + '</td><td>' + cursos.Fecha + '</td><td>' + cursos.Periodo + '</td><td>' + cursos.Modalidad + '</td><td>' + cursos.Docente +'</td><td>' + cursos.Estado+ '</td>';
+        strResult += '<tr rel="' + cursos.Codigo + '"><td>' + cursos.Modalidad + '</td><td>' + cursos.Codigo + '</td><td> ' + cursos.Curso + '</td><td>' + cursos.Fecha + '</td><td>' + cursos.Periodo + '</td><td>' + cursos.Docente + '</td><td>' + cursos.Estado + '</td>';
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="'+cursos.Codigo+'">';
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
@@ -161,16 +161,12 @@ function guardarActividad(event) {
 
         var nuevaActividad = {
             'codigoCurso': $('#guardarActividad input#inputActividadCursoCodigo').val(),
-            'codigoTipoCurso': $('#guardarActividad select#selectTipo').val(),
+            'codUnidad': $('#guardarActividad select#selectUnidad').val(),
+            'codSemana': $('#guardarActividad select#selectSemana').val(),
             'titulo': $('#guardarActividad input#inputTitulo').val(),
-            'fechaInicio': $('#guardarActividad input#datepicker1').val(),
-            'fechaFin': $('#guardarActividad input#datepicker2').val(),
-            'codigoSesion': $('#guardarActividad select#selectSesion').val(),
             'codigoEstado': $('#guardarActividad select#selectEstado').val(),
             'descripcion': $('#guardarActividad textarea#textareaDesc').val(),
-            'usuarioCreacion': 'admin',
-            'codigoModalidad': '1',
-            'codigoPeriodo': $('#qPeriodo').val()
+            'usuarioCreacion': 'admin'
         }
 
         $.ajax({
@@ -275,11 +271,55 @@ function cargarPeriodos() {
         success: function (data) {
             var strResult = '';
             $.each(data, function (index, data) {
-                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+                strResult += "<option value = '" + data.codPeriodo + "'>" + data.descripcion + "</option>";
             });
             //alert("Hola.");
             //$("#qPeriodo").html(strResult);
             $("#qPeriodo").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+
+function cargarUnidades() {
+    var _url = 'http://localhost:49492/api/Unidad';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codUnidad + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectUnidad").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+
+function cargarSemanas() {
+    var _url = 'http://localhost:49492/api/Semana';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codSemana + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectSemana").append(strResult);
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -297,4 +337,6 @@ $(document).ready(function () {
     bindEditarCurso();
     bindNuevaActividad();
     cargarPeriodos();
+    cargarUnidades();
+    cargarSemanas();
 });

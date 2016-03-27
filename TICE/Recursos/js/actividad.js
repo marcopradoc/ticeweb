@@ -26,9 +26,9 @@ function bindNuevaTarea() {
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (index, actividad) {
-                        $('input#inputTareaCursoCodigo').val(actividad.codigoCurso);
+                        $('input#inputTareaCursoCodigo').val(actividad.codCurso);
                         $('input#inputTareaCursoNombre').val(actividad.Curso);
-                        $('input#inputTareaActividadCodigo').val(actividad.codigoActividad);
+                        $('input#inputTareaActividadCodigo').val(actividad.codActividad);
                         $('input#inputTareaActividadNombre').val(actividad.titulo);
                     });
                 },
@@ -58,8 +58,8 @@ function bindEditarActividad() {
                 success: function (data) {
                     $.each(data, function (index, actividad) {
                         $('#inputActivNombreCurso').val(actividad.Curso);
-                        $('#inputActivCodigoCurso').val(actividad.codigoCurso);
-                        $('#inputActivCodigoActividad').val(actividad.codigoActividad);
+                        $('#inputActivCodigoCurso').val(actividad.codCurso);
+                        $('#inputActivCodigoActividad').val(actividad.codActividad);
                         $('#selectActivTipo').val(actividad.codigoTipoCurso);
                         $('#inputActivTitulo').val(actividad.titulo);
                         $('#inputActivFecIni').val(actividad.fechaInicio);
@@ -138,19 +138,19 @@ function WriteResponse(actividades) {
     var strResult = '';
     //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
     $.each(actividades, function (index, actividad) {
-        strResult += '<tr rel="' + actividad.codigoActividad + '">';
-        strResult += '<td>' + actividad.codigoActividad + '</td>';
+        strResult += '<tr rel="' + actividad.codActividad + '">';
+        strResult += '<td>' + actividad.codActividad + '</td>';
+        strResult += '<td>' + actividad.fechaCreacion + '</td>';
+        strResult += '<td>' + actividad.unidad + '</td>';
+        strResult += '<td>' + actividad.semana + '</td>';
         strResult += '<td> ' + actividad.titulo + '</td>';
-        strResult += '<td>' + actividad.TipoCurso + '</td>';
-        strResult += '<td>' + actividad.fechaInicio + '</td>';
-        strResult += '<td>' + actividad.fechaFin + '</td>';
         strResult += '<td></td>';
         strResult += '<td>' + actividad.DescEstado + '</td>';
         strResult += '<td>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditActividad" data-rel="' + actividad.codigoActividad + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditActividad" data-rel="' + actividad.codActividad + '">'
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'
         strResult += '</button>'
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelActividad" data-rel="' + actividad.codigoActividad + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelActividad" data-rel="' + actividad.codActividad + '">'
         strResult += '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
         strResult += '</button>'
         strResult += '</td></tr>';
@@ -184,10 +184,10 @@ function guardarTarea(event) {
             'codigoCurso': $('#guardarTarea input#inputTareaCursoCodigo').val(),
             'codigoActividad': $('#guardarTarea input#inputTareaActividadCodigo').val(),
             'titulo': $('#guardarTarea input#inputTitulo').val(),
-            'codigoPrioridad': $('#guardarTarea select#selectPrioridad').val(),
             'estado': $('#guardarTarea select#selectEstado').val(),
             'porcentajeCompletado': $('#guardarTarea input#inputCompletado').val(),
-            'codigoRecurso': $('#guardarTarea input#inputAsignado').val(),
+            'codigoTipoRecurso': $('#guardarTarea select#selectTipoRecurso').val(),
+            'codigoRecurso': '1',//$('#guardarTarea input#inputRecurso').val(),
             'descripcion': $('#guardarTarea textarea#textareaDesc').val(),
             'fechaInicio': $('#guardarTarea input#datepicker1').val(),
             'fechaFin': $('#guardarTarea input#datepicker2').val(),
