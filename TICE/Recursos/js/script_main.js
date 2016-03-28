@@ -33,12 +33,12 @@ function buscarCapacitaciones() {
 function WriteResponse(capas) {
     var strResult = '';
     $.each(capas, function (index, capa) {
-        strResult += '<tr rel="' + capa.codigoCapacitacion + '">';
+        strResult += '<tr rel="' + capa.codCapacitacion + '">';
         strResult += '<td> ' + capa.nombre + '</td>';
         strResult += '<td>' + capa.periodo + '</td>';
-        strResult += '<td></td>';//estado
+        strResult += '<td>' + capa.estado + '</td>';//estado
         strResult += '<td>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" data-rel="' + capa.codigoCapacitacion + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" data-rel="' + capa.codCapacitacion + '">'
         strResult += '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
         strResult += '</button>'
         strResult += '</td></tr>';
@@ -99,7 +99,7 @@ function cargarPeriodos() {
         success: function (data) {
             var strResult = '';
             $.each(data, function (index, data) {
-                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+                strResult += "<option value = '" + data.codPeriodo + "'>" + data.descripcion + "</option>";
             });
             //alert("Hola.");
             //$("#qPeriodo").html(strResult);

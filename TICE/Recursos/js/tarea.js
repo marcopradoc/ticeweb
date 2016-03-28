@@ -126,10 +126,10 @@ function bindEditarTarea() {
                         $('#inputTareaCodigoTarea').val(tarea.codTarea);
                         //
                         $('#inputTareaTitulo').val(tarea.titulo);
-                        $('#selectTareaPrioridad').val('1');
-                        $('#selectTareaEstado').val('1');
+                        $('#selectTareaEstado').val(tarea.estado);
                         $('#inputTareaCompletado').val(tarea.porcentajeCompletado);
-                        $('#inputTareaAsignado').val(tarea.codRecurso);
+                        $('#selectTipoRecurso').val(tarea.codRecurso);
+                        //$('#inputRecurso').val(tarea.codRecurso);
                         $('#textareaTareaDesc').val(tarea.descripcion);
                         $('#inputTareaFecIni').val(tarea.fechaInicio);
                         $('#inputTareaFecFin').val(tarea.fechaFin);
@@ -243,10 +243,10 @@ function editarTarea(event) {
             'codigoActividad': $('#guardarTarea input#inputTareaCodigoActividad').val(),
             'codigoTarea': $('#guardarTarea input#inputTareaCodigoTarea').val(),
             'titulo': $('#guardarTarea input#inputTareaTitulo').val(),
-            'codigoPrioridad': $('#guardarTarea select#selectTareaPrioridad').val(),
             'estado': $('#guardarTarea select#selectTareaEstado').val(),
             'porcentajeCompletado': $('#guardarTarea input#inputTareaCompletado').val(),
-            'codigoRecurso': $('#guardarTarea input#inputTareaAsignado').val(),
+            'codigoTipoRecurso': $('#guardarTarea select#selectTipoRecurso').val(),
+            'codigoRecurso': '1',//$('#guardarTarea input#inputRecurso').val(),
             'descripcion': $('#guardarTarea textarea#textareaTareaDesc').val(),
             'fechaInicio': $('#guardarTarea input#inputTareaFecIni').val(),
             'fechaFin': $('#guardarTarea input#inputTareaFecFin').val(),
@@ -267,6 +267,8 @@ function editarTarea(event) {
                 $('#myModalEditTarea').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
+
+                cargarActividadTareas();
             }
             else {
                 alert('Error al actualizar tarea');

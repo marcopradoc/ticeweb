@@ -57,7 +57,7 @@ function bindTableModalResult() {
                         success: function (data) {
                             console.log('index('+index+') - len('+len+')');
                             if (index+1 == len)
-                                cargarMateriales();
+                                cargarTalleres();
                         },
                         error: function (x, y, z) {
                             alert(x + '\n' + y + '\n' + z);
@@ -77,26 +77,26 @@ function cancelar() {
     window.location.href = "/Home/Main";
 }
 
-function cargarMateriales(){
+function cargarTalleres(){
     var codigoCapacitacion = $('input#codigoCapa').val();
     jQuery.support.cors = true;
-    var _url = 'http://localhost:49492/api/CapacitacionMaterial?codigoCapacitacion='+codigoCapacitacion;
+    var _url = 'http://localhost:49492/api/Taller?codigoCapacitacion='+codigoCapacitacion;
     $.ajax({
         url: _url,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            WriteResponseMateriales(data);
-            bindTableResultMateriales();
+            WriteResponseTalleres(data);
+            bindTableResultTalleres();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
         }
     });
 }
-function WriteResponseMateriales(materiales) {
+function WriteResponseTalleres(talleres) {
     var strResult = '';
-    $.each(materiales, function (index, material) {
+    $.each(talleres, function (index, material) {
         strResult += '<tr rel="' + material.codigoMaterial + '"><td>' + material.codigoMaterial + '</td><td> ' + material.descripcion + '</td>';
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditMaterial" data-rel="' + material.codigoMaterial + '">'
@@ -110,8 +110,8 @@ function WriteResponseMateriales(materiales) {
     $("#tBodyResult").html(strResult);
 }
 
-function bindTableResultMateriales() {
-    $('#tblMateriales tbody tr').on('click', function (event) {
+function bindTableResultTalleres() {
+    $('#tblTalleres tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
             $('input#materialSelected').val('');
             $(this).removeClass('success');
@@ -178,6 +178,5 @@ function cancelar() {
 $(document).ready(function () {
     bindSeleccionarTaller();
     $('#btnCancelar').on('click', cancelar);
-    cargarMateriales();
     cargarCapacitacion();
 });

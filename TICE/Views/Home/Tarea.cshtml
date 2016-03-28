@@ -183,15 +183,6 @@
                         <div class="col-xs-8 form-group">
                             <input type="text" id="inputTareaNombreCurso" class="form-control" disabled />
                             <input type="hidden" id="inputTareaCodigoCurso" />
-                            <!--
-                            <select class="form-control" id="selectTareaCurso">
-                                <option>Seleccione</option>
-                                <option value="1">Lógica</option>
-                                <option value="2">Aritmética</option>
-                                <option value="3">Algebra</option>
-                                <option value="4">Lenguaje</option>
-                            </select>
-                            -->
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Actividad :</label>
@@ -214,27 +205,6 @@
                             <input class="form-control" type="text" id="inputTareaTitulo" />
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>Prioridad :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <select class="form-control" id="selectTareaPrioridad">
-                                <option>Seleccione</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
-                            <label>Estado :</label>
-                        </div>
-                        <div class="col-xs-8 form-group">
-                            <select class="form-control" id="selectTareaEstado">
-                                <option>Seleccione</option>
-                                <option>Activo</option>
-                                <option>Inactivo</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4 form-group">
                             <label>% Completado :</label>
                         </div>
                         <div class="col-xs-8 form-group">
@@ -244,16 +214,32 @@
                             </div>
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>Asignado a :</label>
+                            <label>Estado :</label>
                         </div>
                         <div class="col-xs-8 form-group">
-                            <input class="form-control" type="text" id="inputTareaAsignado" />
+                            <select class="form-control" id="selectTareaEstado">
+                                <option>Seleccione</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
                         </div>
                         <div class="col-xs-4 form-group">
-                            <label>Descripción :</label>
+                            <label>Tipo Recurso :</label>
                         </div>
                         <div class="col-xs-8 form-group">
-                            <textarea class="form-control" rows="3" id="textareaTareaDesc"></textarea>
+                            <select class="form-control" id="selectTipoRecurso" disabled>
+                                @*<option>Seleccione</option>*@
+                                <option value="1">Docente</option>
+                                <option value="2">Proveedor</option>
+                                <option value="3">Coordinador</option>
+                                <option value="4">Supervisor</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre de Recurso :</label>
+                        </div>
+                        <div class="col-xs-8 form-group">
+                            <input class="form-control" type="text" id="inputRecurso" value="Juan Tello" disabled />
                         </div>
                         <div class="col-xs-4 form-group">
                             <label>Fecha Inicio :</label>
@@ -266,6 +252,12 @@
                         </div>
                         <div class="col-xs-8 form-group">
                             <input class="form-control" type="text" id="inputTareaFecFin">
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Descripción :</label>
+                        </div>
+                        <div class="col-xs-8 form-group">
+                            <textarea class="form-control" rows="3" id="textareaTareaDesc"></textarea>
                         </div>
                     </div>
                 </form>

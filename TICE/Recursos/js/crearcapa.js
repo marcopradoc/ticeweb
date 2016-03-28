@@ -16,18 +16,12 @@ function guardarCapa(event) {
 
         var editActividad = {
             'nombre': $('#guardarCapacitacion input#inputCapaNombre').val(),
-            //'certificado': $('#guardarCapacitacion input#inputCapaCertificado').is(':checked'),
             'codigoPerido': $('#guardarCapacitacion select#selectCapaPeriodo').val(),
-            //'codigoTaller': '2',
             'descripcion': $('#guardarCapacitacion textarea#textareaCapaDescripcion').val(),
-            'capacitacionActiva': $('#guardarCapacitacion input#inputCapaActivo').is(':checked'),
-            //'lugar': $('#guardarCapacitacion input#inputCapaLugar').val(),
-            //'fechaCapacitacion': $('#guardarCapacitacion input#inputCapaFechaCapa').val(),
-            //'hora': $('#guardarCapacitacion input#inputCapaHora').val(),
             'correoContacto': $('#guardarCapacitacion input#inputCapaCorreo').val(),
             'enviarNotificacion': $('#guardarCapacitacion input#inputCapaEnviarNoti').is(':checked'),
             'periodicidadEnvio': $('#guardarCapacitacion input#inputCapaPeriodicidad').val(),
-            //'fechaInicioEnvio': $('#guardarCapacitacion input#inputCapaFechaInicio').val(),
+            'capacitacionActiva': $('#guardarCapacitacion input#inputCapaActivo').is(':checked'),
             'usuarioCreacion': 'admin'
         }
 
@@ -48,11 +42,11 @@ function guardarCapa(event) {
                 //alert(codigoCapacitacion);
                 $('input#codigoCapa').val(''+codigoCapacitacion);
                 // Clear the form inputs
-                /*
+                
                 $('#guardarCapacitacion input').val('');
                 $('#guardarCapacitacion select').val('');
                 $('#guardarCapacitacion textarea').val('');
-                */
+                
                 //actualizar vista
                 notie.alert(1, 'Se registró la capacitación correctamente', 2);
             }
@@ -110,7 +104,7 @@ function cargarCapacitacion() {
             success: function (data) {
                 $.each(data, function (index, capa) {
                     $('input#inputCapaNombre').val(capa.nombre);
-                    $('select#selectCapaPeriodo').val(capa.codigoPerido);
+                    $('select#selectCapaPeriodo').val(capa.codPerido);
                     $('textarea#textareaCapaDescripcion').val(capa.descripcion);
                     //$('input#inputCapaLugar').val(capa.lugar);
                     //$('input#inputCapaFechaCapa').val(capa.fechaCapacitacion);
@@ -140,7 +134,7 @@ function cargarPeriodos() {
         success: function (data) {
             var strResult = '';
             $.each(data, function (index, data) {
-                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+                strResult += "<option value = '" + data.codPeriodo + "'>" + data.descripcion + "</option>";
             });
             //alert("Hola.");
             //$("#qPeriodo").html(strResult);

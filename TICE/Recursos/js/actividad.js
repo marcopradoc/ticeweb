@@ -58,14 +58,12 @@ function bindEditarActividad() {
                 success: function (data) {
                     $.each(data, function (index, actividad) {
                         $('#inputActivNombreCurso').val(actividad.Curso);
+                        $('#selectActivUnidad').val(actividad.codUnidad);
+                        $('#selectActivSemana').val(actividad.codSemana);
                         $('#inputActivCodigoCurso').val(actividad.codCurso);
                         $('#inputActivCodigoActividad').val(actividad.codActividad);
-                        $('#selectActivTipo').val(actividad.codigoTipoCurso);
                         $('#inputActivTitulo').val(actividad.titulo);
-                        $('#inputActivFecIni').val(actividad.fechaInicio);
-                        $('#inputActivFecFin').val(actividad.fechaFin);
-                        $('#selectActivSesion').val(actividad.codigoSesion);
-                        $('#selectActivEstado').val(actividad.codigoEstado);
+                        $('#selectActivEstado').val(actividad.estado);
                         $('#textareaActivDesc').val(actividad.descripcion);
                     });
                 },
@@ -262,45 +260,41 @@ function detTareas() {
 }
 
 function editarActividad(event) {
-    jquery.support.cors = true;
-    event.preventdefault();
+    jQuery.support.cors = true;
+    event.preventDefault();
     var errorcount = 0;
-    $('#guardaractividad input').each(function (index, val) {
+    $('#guardarActividad input').each(function (index, val) {
         if ($(this).val() === '') { errorcount++; }
     });
     if (errorcount === 0) {
 
         var editactividad = {
-            'codigocurso': $('#guardaractividad input#inputactivcodigocurso').val(),
-            'codigoactividad': $('#guardaractividad input#inputactivcodigoactividad').val(),
-            'codigotipocurso': $('#guardaractividad select#selectactivtipo').val(),
-            'titulo': $('#guardaractividad input#inputactivtitulo').val(),
-            'fechainicio': $('#guardaractividad input#inputactivfecini').val(),
-            'fechafin': $('#guardaractividad input#inputactivfecfin').val(),
-            'codigosesion': $('#guardaractividad select#selectactivsesion').val(),
-            'codigoestado': $('#guardaractividad select#selectactivestado').val(),
-            'descripcion': $('#guardaractividad textarea#textareaactivdesc').val(),
-            'usuariocreacion': 'admin',
-            'codigomodalidad': '1',
-            'codigoperiodo': '1'
+            'codigoActividad': $('#guardarActividad input#inputActivCodigoActividad').val(),
+            'codigoCurso': $('#guardarActividad input#inputActivCodigoCurso').val(),
+            'codUnidad': $('#guardarActividad select#selectActivUnidad').val(),
+            'codSemana': $('#guardarActividad select#selectActivSemana').val(),
+            'titulo': $('#guardarActividad input#inputActivTitulo').val(),
+            'codigoEstado': $('#guardarActividad select#selectActivEstado').val(),
+            'descripcion': $('#guardarActividad textarea#textareaActivDesc').val(),
+            'usuarioModificacion': 'admin'
         }
 
         $.ajax({
-            type: 'post',
+            type: 'POST',
             data: editactividad,
-            url: 'http://localhost:49492/api/actividad',
-            datatype: 'json'
+            url: 'http://localhost:49492/api/Actividad',
+            datatype: 'JSON'
         }).done(function (response) {
             // check for successful (blank) response
             if (response == '-1') {
                 // clear the form inputs
-                $('#guardaractividad input').val('');
-                $('#guardaractividad select').val('');
-                $('#guardaractividad textarea').val('');
-                $('#mymodaleditactividad').modal('hide');
+                $('#guardarActividad input').val('');
+                $('#guardarActividad select').val('');
+                $('#guardarActividad textarea').val('');
+                $('#myModalEditActividad').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
-                cargarcursoactividades();
+                cargarCursoActividades();
             }
             else {
                 alert('error al actualizar actividad');
@@ -311,6 +305,50 @@ function editarActividad(event) {
         alert('por favor, ingresar todos los campos');
         return false;
     }
+}
+
+function cargarUnidades() {
+    var _url = 'http://localhost:49492/api/Unidad';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codUnidad + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectActivUnidad").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
+}
+
+function cargarSemanas() {
+    var _url = 'http://localhost:49492/api/Semana';
+
+    $.ajax({
+        url: _url,
+        type: "GET",
+        dataType: 'json',
+        success: function (data) {
+            var strResult = '';
+            $.each(data, function (index, data) {
+                strResult += "<option value = '" + data.codSemana + "'>" + data.descripcion + "</option>";
+            });
+            //alert("Hola.");
+            //$("#qPeriodo").html(strResult);
+            $("#selectActivSemana").append(strResult);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    })
 }
 
 $(document).ready(function () {
@@ -325,4 +363,6 @@ $(document).ready(function () {
     bindNuevaTarea();
     cargarCursoActividades();
     cargarCursoHeader();
+    cargarUnidades();
+    cargarSemanas();
 });
