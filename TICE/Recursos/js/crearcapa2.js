@@ -96,8 +96,8 @@ function cargarTalleres(){
 }
 function WriteResponseTalleres(talleres) {
     var strResult = '';
-    $.each(talleres, function (index, material) {
-        strResult += '<tr rel="' + material.codigoMaterial + '"><td>' + material.codigoMaterial + '</td><td> ' + material.descripcion + '</td>';
+    $.each(talleres, function (index, taller) {
+        strResult += '<tr rel="' + taller.codigoMaterial + '"><td>' + taller.codigoMaterial + '</td><td> ' + taller.descripcion + '</td>';
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditMaterial" data-rel="' + material.codigoMaterial + '">'
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'
