@@ -113,14 +113,14 @@ function bindTableResult() {
 }
 
 function bindBuscarFocus() {
-    $('#myModalEditTaller').on('show.bs.modal', function (event) {
+    $('#myModalBusqueda').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var recipient = button.data('rel');
         //var modal = $(this);
         //alert(recipient);
-        $('#detalleSelected').val(recipient);
+        //$('#detalleSelected').val(recipient);
         if (recipient > '0') {
-            var _url = 'http://localhost:49492/api/DetalleCapacitacion?codDetalleCapacitacion=' + recipient;
+            var _url = 'http://localhost:49492/api/FocusGroup?codCurso=' + recipient;
             $.ajax({
                 url: _url,
                 type: "GET",
@@ -130,14 +130,15 @@ function bindBuscarFocus() {
                     $.each(data, function (index, data) {
                         //strResult += "<option value = '" + data.codAula + "'>" + data.descripcion + "</option>";
 
-                        $('#inputCodigoAV').val(data.codAulaVirtual);
-                        $('#inputFecIni').val(data.fechaInicio);
-                        $('#inputFecFin').val(data.fechaFin);
-                        $('#selectSede').val(data.codSede);
-                        $('#selectAula').val(data.lugar);
-                        $('#inputSesPre').val(data.sesionesPresenciales);
-                        $('#inputSesVir').val(data.sesionesVirtuales);
-                        $('#inputFecEnv').val(data.fechaEnvioNotificacion);
+                        $('#inputModalidad').val(data.modalidad);
+                        $('#inputCurso').val(data.curso);
+                        $('#inputDocente').val(data.docente);
+                        $('#inputCampus').val(data.campus);
+                        $('#inputHoraIni').val(data.horaInicio);
+                        $('#inputPsicologo').val(data.psicologo);
+                        $('#inputConfirmacionDoc').val(data.confirmacionPsicologo);
+                        $('#inputConfirmacionPsi').val(data.confirmacionDocente);
+                        $('#inputEstado').val(data.estado);
                     });
                 },
                 error: function (x, y, z) {
@@ -145,14 +146,15 @@ function bindBuscarFocus() {
                 }
             })
         } else {
-            $('#inputCodigoAV').val('');
-            $('#inputFecIni').val('');
-            $('#inputFecFin').val('');
-            $('#selectSede').val('');
-            $('#selectAula').val('');
-            $('#inputSesPre').val('');
-            $('#inputSesVir').val('');
-            $('#inputFecEnv').val('');
+            //$('#inputModalidad').val('');
+            //$('#inputCurso').val('');
+            //$('#inputDocente').val('');
+            //$('#inputCampus').val('');
+            //$('#inputHoraIni').val('');
+            //$('#inputPsicologo').val('');
+            //$('#inputConfirmacionDoc').val('');
+            //$('#inputConfirmacionPsi').val('');
+            //$('#inputEstado').val('');
         }
     });
 }
@@ -163,5 +165,6 @@ $(document).ready(function () {
     $('select#selectDireccion').change(function () {
         cargarCursos($(this).val());
     })
+    bindBuscarFocus();
     //cargarCursos();
 });
