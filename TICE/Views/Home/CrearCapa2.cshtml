@@ -13,25 +13,26 @@
         </ul>
 
         <div class="panel panel-default">
-            <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Lista Materiales</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Lista Talleres</div>
             <div class="panel-body">
 
                 <input type="hidden" value="@ViewData["codigoCapa"]" name="codigoCapa" id="codigoCapa" />
 
                 @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Añadir Taller
-                </button>
-                <br><br>*@
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Añadir Taller
+                    </button>
+                    <br><br>*@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 form-group">
                         <label>Nombre Capacitación</label>
                     </div>
-                    <div class="col-xs-12 col-md-6 form-group">
+                    <div class="col-xs-12 col-md-2 form-group">
                         <span id="spNombreCapacitacion"></span>
                     </div>
                 </div>
 
-                <input type="hidden" name="materialSelected" id="materialSelected"/>
+                <input type="hidden" name="tallerSelected" id="tallerSelected" />
+                <input type="hidden" name="detalleSelected" id="detalleSelected" />
 
                 <div class="row">
                     <div class="col-xs-12 col-md-8">
@@ -47,8 +48,7 @@
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tBodyResult">
-                                </tbody>
+                                <tbody id="tBodyResult"></tbody>
                             </table>
                         </div>
                     </div>
@@ -58,59 +58,188 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="myModalEditTaller" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">
-                            Listado de talleres
-                            <img src="~/images/Bb_learn_small.png" style="width:100px;float:right" />
+                            Detalle Capacitación
+                            <img src="~/Recursos/images/Bb_learn_small.png" style="width:100px;float:right" />
                         </h4>
                     </div>
                     <div class="modal-body">
-
-                        <span>* Seleccione una fila para cargar los materiales del taller</span>
-
-                        <input type="hidden" id="tallerSelected" name="tallerSelected"/>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-8">
-                                <div class="table-responsive">
-                                    <table id="tblTalleres" class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Nombre Taller</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="modalTBodyResult">
-                                            <!--
-                                            <tr>
-                                                <td>T001</td>
-                                                <td>Guilizzoni</td>
-                                            </tr>
-                                            <tr>
-                                                <td>T002</td>
-                                                <td>Guilizzoni</td>
-                                            </tr>
-                                            <tr>
-                                                <td>T003</td>
-                                                <td>Maclachlan</td>
-                                            </tr>
-                                            -->
-                                        </tbody>
-                                    </table>
+                        <form id="guardarDetalle">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Nombre de Capacitación :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <span id="spNombreEditCapacitacion"></span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Nombre de Taller :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <span id="spNombreEditTaller"></span>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Código AV :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputCodigoAV" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Fecha de Inicio :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputFecIni">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Fecha de Fin :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputFecFin">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Sede :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <select class="form-control" id="selectSede">
+                                        <option>Seleccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Lugar :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <select class="form-control" id="selectAula">
+                                        <option>Seleccione</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Sesiones Presenciales :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputSesPre" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Sesiones Virtuales :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputSesVir" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Fecha de inicio de envío de notificación :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <input class="form-control" type="text" id="inputFecEnv">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="btnGuardarDetalle">Guardar</button>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- Fin Modal -->
 
-@section scripts{
-        <script src="~/Recursos/js/notie.js"></script>
-        <script src="~/Recursos/js/crearcapa2.js"></script>
-}
+        <div class="modal fade" id="myModalParticipantes" tabindex="-1" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Lista Participantes
+                            <img src="~/Recursos/images/Bb_learn_small.png" style="width:100px;float:right" />
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="guardarParticipantes">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6 form-group">
+                                    <label>Nombre de Taller :</label>
+                                </div>
+                                <div class="col-xs-12 col-md-4 form-group">
+                                    <span id="spNombrePartCapacitacion"></span>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Buscar Docentes</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-3 form-group">
+                                        <label>Dirección A.</label>
+                                        <select class="form-control" id="selectDireccion">
+                                            <option value="" selected> Seleccione </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 form-group">
+                                        <label>Nombre del Docente</label>
+                                        <input class="form-control" type="text" id="inputNomDocente" />
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 form-group">
+                                        <button id="btnBuscarDocente" type="button" class="btn btn-default btn-form-line">Buscar</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="table-responsive">
+                                            <table id="tblDocentes" class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Código Docente</th>
+                                                        <th>Nombre</th>
+                                                        <th>Email</th>
+                                                        <th>Teléfono</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tBodyResultPart"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="btnAgregar">Añadir</button>
+                            </div>
+                            <div class="panel-heading"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Lista de Docentes para Taller</div>
+                            <div class="panel-body">
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="btnGuardarParticipantes">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @section scripts{
+            <script src="~/Recursos/js/notie.js"></script>
+            <script src="~/Recursos/js/crearcapa2.js"></script>
+        }

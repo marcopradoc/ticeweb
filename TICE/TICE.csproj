@@ -210,6 +210,7 @@
     <Content Include="Recursos\images\upc_trim.png" />
     <Content Include="Recursos\images\white_arrow_down.png" />
     <Content Include="Recursos\images\white_mail.png" />
+    <Content Include="Recursos\js\focus.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -281,6 +282,7 @@
     <Content Include="Views\Home\Documento.cshtml" />
     <Content Include="Views\Home\Tarea.cshtml" />
     <Content Include="Views\Home\Tarea_Milton.cshtml" />
+    <Content Include="Views\Home\FocusGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

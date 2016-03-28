@@ -97,5 +97,12 @@ namespace TICE.Controllers
         {
             return View();
         }
+
+        public ActionResult FocusGroup()
+        {
+            //ViewBag.Message = "Página de Actividades.";
+            ViewData["menu"] = "focusgroup";
+            return View();
+        }
     }
 }

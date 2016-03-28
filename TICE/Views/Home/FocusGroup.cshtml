@@ -1,0 +1,73 @@
+﻿<div class="site-content">
+    <div class="container-fluid">
+
+        <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Focus Group</h2>
+
+        <button type="button" class="btn btn-default" onclick="javascript: irCrearFocus()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span id="txtCrearFocus">Nuevo Focus</span>
+        </button>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Dirección Académica</label>
+                                <select class="form-control" id="selectDireccion">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Estado</label>
+                                <select class="form-control" id="selectEstado">
+                                    <option value="0" selected> Seleccione </option>
+                                    <option value="Enviado">Enviado</option>
+                                    <option value="Pendiente de Confirmar">Pendiente de Confirmar</option>
+                                    <option value="Confirmado">Confirmado</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-md-2 form-group">
+                                <button id="btnBuscarFocus" type="button" class="btn btn-default btn-form-line">Buscar</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Curso</label>
+                                <select class="form-control" id="selectCurso">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" value="" name="cursoSelected" id="cursoSelected" />
+
+        <div class="table-responsive">
+            <table id="tblFocus" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre Curso</th>
+                        <th>Encargado</th>
+                        <th>Confirmado por Docente</th>
+                        <th>Confirmado por Psicólogo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyResult"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Recursos/js/notie.js"></script>
+    <script src="~/Recursos/js/focus.js"></script>
+}
