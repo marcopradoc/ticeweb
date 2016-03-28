@@ -68,7 +68,7 @@ function buscarFocus() {
             dataType: 'json',
             success: function (data) {
                 WriteResponse(data);
-                //bindTableResult();
+                bindTableResult();
             },
             error: function (x, y, z) {
                 alert(x + '\n' + y + '\n' + z);
@@ -90,7 +90,7 @@ function WriteResponse(focus) {
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelete" data-rel="' + data.codCurso + '">'
         strResult += '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
         strResult += '</button>'
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalSearch" data-rel="' + data.codCurso + '">'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBusqueda" data-rel="' + data.codCurso + '">'
         strResult += '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>'
         strResult += '</button>'
         strResult += '</td></tr>';
@@ -108,6 +108,51 @@ function bindTableResult() {
             $('input#cursoSelected').val($(this).attr('rel'));
             $(this).addClass('success').siblings().removeClass('success');
             //$('#txtCrearCapa').text('Editar Capacitacion');
+        }
+    });
+}
+
+function bindBuscarFocus() {
+    $('#myModalEditTaller').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('rel');
+        //var modal = $(this);
+        //alert(recipient);
+        $('#detalleSelected').val(recipient);
+        if (recipient > '0') {
+            var _url = 'http://localhost:49492/api/DetalleCapacitacion?codDetalleCapacitacion=' + recipient;
+            $.ajax({
+                url: _url,
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    //var strResult = '';
+                    $.each(data, function (index, data) {
+                        //strResult += "<option value = '" + data.codAula + "'>" + data.descripcion + "</option>";
+
+                        $('#inputCodigoAV').val(data.codAulaVirtual);
+                        $('#inputFecIni').val(data.fechaInicio);
+                        $('#inputFecFin').val(data.fechaFin);
+                        $('#selectSede').val(data.codSede);
+                        $('#selectAula').val(data.lugar);
+                        $('#inputSesPre').val(data.sesionesPresenciales);
+                        $('#inputSesVir').val(data.sesionesVirtuales);
+                        $('#inputFecEnv').val(data.fechaEnvioNotificacion);
+                    });
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            })
+        } else {
+            $('#inputCodigoAV').val('');
+            $('#inputFecIni').val('');
+            $('#inputFecFin').val('');
+            $('#selectSede').val('');
+            $('#selectAula').val('');
+            $('#inputSesPre').val('');
+            $('#inputSesVir').val('');
+            $('#inputFecEnv').val('');
         }
     });
 }
