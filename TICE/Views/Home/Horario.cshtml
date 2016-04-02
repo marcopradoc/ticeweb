@@ -1,0 +1,72 @@
+﻿<div class="site-content">
+    <div class="container-fluid">
+
+        <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Horarios</h2>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Modalidad</label>
+                                <select class="form-control" id="selectModalidad">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Curso</label>
+                                <select class="form-control" id="selectCurso">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Docente</label>
+                                <select class="form-control" id="selectDocente">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Semana</label>
+                                <select class="form-control" id="selectSemana">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default" id="btnBuscar">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <span id="txtBuscar">Buscar</span>
+        </button>
+
+        <div class="table-responsive">
+            <table id="tblHorario" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Hora/Día</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miercoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyResult"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Recursos/js/notie.js"></script>
+    <script src="~/Recursos/js/horario.js"></script>
+}

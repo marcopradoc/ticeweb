@@ -104,5 +104,18 @@ namespace TICE.Controllers
             ViewData["menu"] = "focusgroup";
             return View();
         }
+
+        public ActionResult Horario()
+        {
+            //ViewBag.Message = "Página de Actividades.";
+            ViewData["menu"] = "focusgroup";
+            return View();
+        }
+        public ActionResult Actas()
+        {
+            //ViewBag.Message = "Página de Actividades.";
+            ViewData["menu"] = "actas";
+            return View();
+        }
     }
 }

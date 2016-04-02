@@ -159,6 +159,16 @@ function bindBuscarFocus() {
     });
 }
 
+function crearHorario() {
+    //var codigoCapa = $('input#cursoSelected').val();
+    //if (!isEmpty(codigoCapa)) {
+    //    window.location.href = "/Home/Horario/";
+    //} else {
+    //    notie.alert(1, 'Debe guardar la capacitación', 2);
+    //}
+    window.location.href = "/Home/Horario";
+}
+
 $(document).ready(function () {
     $('#btnBuscarFocus').on('click', buscarFocus);
     cargarDirecciones();

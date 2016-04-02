@@ -1,0 +1,78 @@
+﻿<div class="site-content">
+    <div class="container-fluid">
+
+        <h2>Listado de Tareas</h2>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Modalidad</label>
+                                <select class="form-control" id="selectModalidad">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Estado Tarea</label>
+                                <select class="form-control" id="selectEstadoTarea">
+                                    <option>Seleccione</option>
+                                    <option value="1">Activo</option>
+                                    <option value="2">Inactivo</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-md-2 form-group">
+                                <label>Estado Acta</label>
+                                <select class="form-control" id="selectEstadoActa">
+                                    <option value="-1" selected> Seleccione </option>
+                                    <option value="0">Pendientes</option>
+                                    <option value="1">Generadas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @*<div class="col-xs-6 col-md-3 form-group">
+                                <label>Tipo de Recuso</label>
+                                <select class="form-control" id="selectTipoRecurso">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>*@
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <button id="btnBuscarTareas" type="button" class="btn btn-default btn-form-line">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" value="" name="tareaSelected" id="tareaSelected" />
+
+        <div class="table-responsive">
+            <table id="tblTareas" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Actividad</th>
+                        <th>Unidad</th>
+                        <th>Semana</th>
+                        <th>Tarea</th>
+                        <th>Nombre Recurso</th>
+                        <th>Fecha Término</th>
+                        <th>Cod. Acta</th>
+                        <th>Estado</th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyResult"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Recursos/js/actas.js"></script>
+    <script src="~/Recursos/js/focus.js"></script>
+}
