@@ -28,7 +28,7 @@ function WriteResponse(tareas) {
         strResult += '<td> ' + tarea.titulo + '</td>';
         strResult += '<td>' + tarea.fechaCreacion + '</td>';
         strResult += '<td>' + tarea.porcentajeCompletado + '</td>';
-        strResult += '<td></td>';//asignado
+        strResult += '<td>ANA MARIA DIAZ SALINAS</td>';//asignado
         strResult += '<td>' + tarea.fechaInicio + '</td>';
         strResult += '<td>' + tarea.fechaFin + '</td>';
         strResult += '<td>';

@@ -42,7 +42,6 @@ function cargarTiposRecursos() {
 function cargarTareas() {
     jQuery.support.cors = true;
     var codigoModalidad = $('#selectModalidad').val();
-    //var codigoTipoRecurso = $('#selectTipoRecurso').val();
     var estadoTarea = $('#selectEstadoTarea').val();
     var estadoActa = $('#selectEstadoActa').val();
     $.ajax({
@@ -52,7 +51,7 @@ function cargarTareas() {
         dataType: 'json',
         success: function (data) {
             WriteResponseActa(data);
-            //bindTableResult();
+            bindTableResultActa();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -62,46 +61,51 @@ function cargarTareas() {
 
 function WriteResponseActa(tareas) {
     var strResult = '';
-    //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
     $.each(tareas, function (index, tarea) {
         strResult += '<tr rel="' + tarea.codTarea + '">';
         strResult += '<td>' + tarea.Curso + '</td>';
         strResult += '<td>' + tarea.Actividad + '</td>';
         strResult += '<td>' + tarea.Unidad + '</td>';
         strResult += '<td>' + tarea.Semana + '</td>';
-        strResult += '<td>' + tarea.Tarea + '</td>';//asignado
+        strResult += '<td>' + tarea.Tarea + '</td>';
         strResult += '<td>' + tarea.NombreRecurso + '</td>';
         strResult += '<td>' + tarea.FechaTermino + '</td>';
         strResult += '<td>' + tarea.codigo + '</td>';
         strResult += '<td>' + tarea.EstadoActa + '</td>';
         strResult += '<td>';
         strResult += '<input type="checkbox" data-rel="' + tarea.codTarea + '">'
-        //strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'
         strResult += '</button>'
         strResult += '</td></tr>';
     });
-    //strResult += "</table>";
     $("#tbodyResult").html(strResult);
 }
 
-function bindTableResult() {
-    $('#tblTareas tbody tr').on('click', function (event) {
-        if ($(this).hasClass('success')) {
-            $('input#tareaSelected').val('');
-            $('#tblTareas').addClass('disabled');
-            $(this).removeClass('success');
-            $('.btn-documento').addClass('disabled');
+function bindTableResultActa() {
+    //$('#tblTareas tbody tr').on('click', function (event) {
+    //    if ($(this).hasClass('success')) {
+    //        $('input#tareaSelected').val('');
+    //        //$('#tblTareas').addClass('disabled');
+    //        $(this).removeClass('success');
+    //        //$('.btn-documento').addClass('disabled');
+    //    } else {
+    //        $('input#tareaSelected').val($(this).attr('rel'));
+    //        //$('#tblTareas').removeClass('disabled');
+    //        $(this).addClass('success').siblings().removeClass('success');
+    //        //$('.btn-documento').removeClass('disabled');
+    //    }
+    //});
+    $("input[type='checkbox']").change(function (e) {
+        if ($(this).is(":checked")) {
+            $(this).closest('tr').addClass("success");
+            //$('input#tareaSelected').val($(this).closest('tr').attr('rel'));
+            //alert($(this).closest('tr').attr('rel'));
         } else {
-            $('input#tareaSelected').val($(this).attr('rel'));
-            $('#tblTareas').removeClass('disabled');
-            $(this).addClass('success').siblings().removeClass('success');
-            $('.btn-documento').removeClass('disabled');
+            $(this).closest('tr').removeClass("success");
         }
     });
 }
 
 $(document).ready(function () {
     cargarModalidades();
-    //cargarTiposRecursos();
     $('#btnBuscarTareas').on('click', cargarTareas);
 });

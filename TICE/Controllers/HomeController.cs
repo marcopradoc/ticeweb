@@ -117,5 +117,11 @@ namespace TICE.Controllers
             ViewData["menu"] = "actas";
             return View();
         }
+        public ActionResult Proyeccion()
+        {
+            //ViewBag.Message = "Página de Actividades.";
+            ViewData["menu"] = "proyeccion";
+            return View();
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿<div class="site-content">
+    <div class="container-fluid">
+
+        <h2>Proyecciones</h2>
+
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <label>Modalidad :</label>
+                    </div>
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <select class="form-control" id="selectModalidad">
+                            <option value="0" selected> Seleccione </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <label>Dirección :</label>
+                    </div>
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <select class="form-control" id="selectDireccion">
+                            <option value="0" selected> Seleccione </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <label>Coordinador de Carrera :</label>
+                    </div>
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <span id="spanCoordinador">CARLOS GUTIERREZ SALINAS</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <label>Periodo :</label>
+                    </div>
+                    <div class="col-xs-2 col-md-2 form-group">
+                        <select class="form-control" id="selectPeriodo">
+                            <option value="0" selected> Seleccione </option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <button type="button" class="btn btn-default btn-documento" id="btnProyeccion">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Proponer Cursos a Blenderizar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Recursos/js/notie.js"></script>
+    <script src="~/Recursos/js/proyeccion.js"></script>
+}
