@@ -153,8 +153,8 @@ function armarHorario(fechas) {
 
 $(document).ready(function () {
     cargarModalidades();
-    cargarCursos(82);
-    cargarDocentes(82);
+    cargarCursos(5);
+    cargarDocentes(5);
     cargarSemanas();
 
     $('#btnBuscarHorario').on('click', cargarHorario);
