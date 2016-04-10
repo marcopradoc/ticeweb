@@ -19,7 +19,7 @@ function bindNuevaTarea() {
         var codigoActividad = $('input#actividadSelected').val();
         var codigoCurso = $('input#codigoCurso').val();
         if (!isEmpty(codigoCurso)) {
-            var _url = 'http://localhost:49492/api/Actividad?codigoCurso=' + codigoCurso+'&codigoActividad='+codigoActividad;
+            var _url = 'http://localhost:49492/api/Actividad?codigoCurso=' + codigoCurso + '&codigoActividad=' + codigoActividad;
             $.ajax({
                 url: _url,
                 type: 'GET',
@@ -177,10 +177,12 @@ function guardarTarea(event) {
     $('#guardarTarea input').each(function (index, val) {
         if ($(this).val() === '') { errorCount++; }
     });
-    if (errorCount === 0) {        
+    if (errorCount === 0) {
+        var codCurso = $('#guardarTarea input#inputTareaCursoCodigo').val();
+        var codActividad = $('#guardarTarea input#inputTareaActividadCodigo').val();
         var nuevaTarea = {
-            'codigoCurso': $('#guardarTarea input#inputTareaCursoCodigo').val(),
-            'codigoActividad': $('#guardarTarea input#inputTareaActividadCodigo').val(),
+            'codigoCurso': codCurso,
+            'codigoActividad': codActividad,
             'titulo': $('#guardarTarea input#inputTitulo').val(),
             'estado': $('#guardarTarea select#selectEstado').val(),
             'porcentajeCompletado': $('#guardarTarea input#inputCompletado').val(),
@@ -203,10 +205,12 @@ function guardarTarea(event) {
                 $('#guardarTarea input').val('');
                 $('#guardarTarea select').val('');
                 $('#guardarTarea textarea').val('');
-                              
+
                 $('#myModal').modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
+
+                window.location.href = "/Home/Tarea/?codigoCurso=" + codCurso + "&codigoActividad=" + codActividad;
             }
             else {
                 alert('Error: ' + response.msg);
@@ -229,7 +233,7 @@ function deleteActividad(event) {
     if (!isEmpty(codigoActividad)) {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:49492/api/Actividad?codigoCurso='+codigoCurso+'&codigoActividad='+codigoActividad,
+            url: 'http://localhost:49492/api/Actividad?codigoCurso=' + codigoCurso + '&codigoActividad=' + codigoActividad,
             dataType: 'JSON'
         }).done(function (response) {
             // Check for successful (blank) response
@@ -253,7 +257,7 @@ function detTareas() {
     var codigoActividad = $('input#actividadSelected').val();
     var codigoCurso = $('input#codigoCurso').val();
     if (!isEmpty(codigoActividad)) {
-        window.location.href = "/Home/Tarea/?codigoCurso="+codigoCurso+"&codigoActividad=" + codigoActividad;
+        window.location.href = "/Home/Tarea/?codigoCurso=" + codigoCurso + "&codigoActividad=" + codigoActividad;
     } else {
         notie.alert(1, 'Debe seleccionar una actividad', 2);
     }

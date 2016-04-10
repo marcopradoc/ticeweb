@@ -41,7 +41,7 @@ namespace TICE.Controllers
             return View();
         }
 
-        public ActionResult Tarea(int codigoCurso, int codigoActividad)
+        public ActionResult Tarea(string codigoCurso, int codigoActividad)
         {
             ViewData["Message"] = "Your application description page.";
             ViewData["menu"] = "cursos";
@@ -50,14 +50,14 @@ namespace TICE.Controllers
             return View();
         }
 
-        public ActionResult Actividad(int codigoCurso)
+        public ActionResult Actividad(string codigoCurso)
         {
             ViewData["Message"] = "Your contact page.";
             ViewData["menu"] = "cursos";
             ViewData["codigoCurso"] = codigoCurso;
             return View();
         }
-        public ActionResult Documento(int codigoCurso, int codigoActividad, int codigoTarea)
+        public ActionResult Documento(string codigoCurso, int codigoActividad, int codigoTarea)
         {
             ViewData["menu"] = "cursos";
             ViewData["Message"] = "Your contact page.";

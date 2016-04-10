@@ -107,6 +107,10 @@ function WriteResponse(cursos) {
     $.each(cursos, function (index, cursos) {
         strResult += '<tr rel="' + cursos.Codigo + '"><td>' + cursos.Modalidad + '</td><td>' + cursos.Codigo + '</td><td> ' + cursos.Curso + '</td><td>' + cursos.Fecha + '</td><td>' + cursos.Periodo + '</td><td>' + cursos.Docente + '</td><td>' + cursos.Estado + '</td>';
         strResult += '<td>';
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
+        strResult += '<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>';
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalUpload" data-rel="' + cursos.Codigo + '">';
+        strResult += '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="'+cursos.Codigo+'">';
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
         strResult += '</td></tr>';
@@ -158,9 +162,9 @@ function guardarActividad(event) {
         if ($(this).val() === '') { errorCount++; }
     });
     if (errorCount === 0) {
-
+        var codCurso = $('#guardarActividad input#inputActividadCursoCodigo').val();
         var nuevaActividad = {
-            'codigoCurso': $('#guardarActividad input#inputActividadCursoCodigo').val(),
+            'codigoCurso': codCurso,
             'codUnidad': $('#guardarActividad select#selectUnidad').val(),
             'codSemana': $('#guardarActividad select#selectSemana').val(),
             'titulo': $('#guardarActividad input#inputTitulo').val(),
@@ -187,6 +191,7 @@ function guardarActividad(event) {
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
                 
+                window.location.href = "/Home/Actividad/?codigoCurso=" + codCurso;
             }
             else {
                 alert('Error al guardar actividad');
