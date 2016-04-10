@@ -105,23 +105,50 @@ function WriteResponse(cursos) {
     var strResult = '';
     //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
     $.each(cursos, function (index, cursos) {
+        var estadoBotonCarga = "", estadoBotonDescarga = "";
+        //$.ajax({
+        //    url: '/Home/ValidarCarpetas/?codigoCurso=' + cursos.Codigo,
+        //    type: 'POST',
+        //    dataType: 'json',
+        //    success: function (data) {
+        //        estadoBotonCarga = 'btn btn-default btn-xs ' + data;
+        //        if (data == "")
+        //            estadoBotonDescarga = 'btn btn-default btn-xs disabled';
+
+        //        strResult += '<tr rel="' + cursos.Codigo + '"><td>' + cursos.Modalidad + '</td><td>' + cursos.Codigo + '</td><td> ' + cursos.Curso + '</td><td>' + cursos.Fecha + '</td><td>' + cursos.Periodo + '</td><td>' + cursos.Docente + '</td><td>' + cursos.Estado + '</td>';
+        //        strResult += '<td>';
+        //        strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonCarga + ' data-toggle="modal" data-target="#myModalUpload" data-rel="' + cursos.Codigo + '">';
+        //        strResult += '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button>';
+        //        strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonDescarga + ' data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
+        //        strResult += '<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>';
+        //        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="' + cursos.Codigo + '">';
+        //        strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
+        //        strResult += '</td></tr>';
+        //    },
+        //    error: function (x, y, z) {
+        //        alert(x + '\n' + y + '\n' + z);
+        //    }
+        //});
         strResult += '<tr rel="' + cursos.Codigo + '"><td>' + cursos.Modalidad + '</td><td>' + cursos.Codigo + '</td><td> ' + cursos.Curso + '</td><td>' + cursos.Fecha + '</td><td>' + cursos.Periodo + '</td><td>' + cursos.Docente + '</td><td>' + cursos.Estado + '</td>';
         strResult += '<td>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
-        strResult += '<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalUpload" data-rel="' + cursos.Codigo + '">';
+        strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonCarga + ' data-toggle="modal" data-target="#myModalUpload" data-rel="' + cursos.Codigo + '">';
         strResult += '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button>';
-        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="'+cursos.Codigo+'">';
+        strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonDescarga + ' data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
+        strResult += '<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>';
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="' + cursos.Codigo + '">';
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
         strResult += '</td></tr>';
     });
-    //strResult += "</table>";
     $("#tbodyResult").html(strResult);
 }
 
 function bindTableResult() {
     $('#tblCursos tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
+
+            if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
             $('input#cursoSelected').val('');
             $('#tbActividades').addClass('disabled');
             $(this).removeClass('success');
@@ -278,8 +305,6 @@ function cargarPeriodos() {
             $.each(data, function (index, data) {
                 strResult += "<option value = '" + data.codPeriodo + "'>" + data.descripcion + "</option>";
             });
-            //alert("Hola.");
-            //$("#qPeriodo").html(strResult);
             $("#qPeriodo").append(strResult);
         },
         error: function (x, y, z) {
@@ -300,8 +325,6 @@ function cargarUnidades() {
             $.each(data, function (index, data) {
                 strResult += "<option value = '" + data.codUnidad + "'>" + data.descripcion + "</option>";
             });
-            //alert("Hola.");
-            //$("#qPeriodo").html(strResult);
             $("#selectUnidad").append(strResult);
         },
         error: function (x, y, z) {
@@ -322,8 +345,6 @@ function cargarSemanas() {
             $.each(data, function (index, data) {
                 strResult += "<option value = '" + data.codSemana + "'>" + data.descripcion + "</option>";
             });
-            //alert("Hola.");
-            //$("#qPeriodo").html(strResult);
             $("#selectSemana").append(strResult);
         },
         error: function (x, y, z) {
@@ -340,8 +361,29 @@ $(document).ready(function () {
     $('#btnEditarCurso').on('click', editarCurso);
     $('#btnBuscarCurso').on('click', cursosxAsignacion);
     bindEditarCurso();
-    bindNuevaActividad();
+    //bindNuevaActividad();
     cargarPeriodos();
     cargarUnidades();
     cargarSemanas();
+
+    document.getElementById('uploader').onsubmit = function () {
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('fileInput');
+        //Iterating through each files selected in fileInput
+        for (i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+        //Creating an XMLHttpRequest and sending
+        var codigoCurso = $('input#inputActividadCursoCodigo').val();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Home/Upload/?codigoCurso=' + codigoCurso);
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            }
+        }
+        return false;
+    }
 });

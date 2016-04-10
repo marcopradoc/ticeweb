@@ -123,5 +123,31 @@ namespace TICE.Controllers
             ViewData["menu"] = "proyeccion";
             return View();
         }
+
+        public JsonResult Upload(string codigoCurso)
+        {
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i]; //Uploaded file
+                //Use the following properties to get file's name, size and MIMEType
+                int fileSize = file.ContentLength;
+                string fileName = file.FileName;
+                string mimeType = file.ContentType;
+                System.IO.Stream fileContent = file.InputStream;
+                //To save file, use SaveAs method
+                System.IO.Directory.CreateDirectory(Server.MapPath("~/documentos/" + codigoCurso + "/"));
+                file.SaveAs(Server.MapPath("~/documentos/" + codigoCurso + "/") + fileName); //File will be saved in application root
+            }
+            return Json("Se cargó el archivo correctamente");
+        }
+
+        public JsonResult ValidarCarpetas(string codigoCurso)
+        {
+            string result = null;
+            if (System.IO.Directory.Exists(Server.MapPath("~/documentos/" + codigoCurso + "/")))
+                result = "disabled";
+
+            return Json(result);
+        }
     }
 }
