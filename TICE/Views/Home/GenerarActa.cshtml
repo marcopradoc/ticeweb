@@ -1,0 +1,264 @@
+﻿<div class="site-content">
+    <div class="container-fluid">
+
+        <h2>Acta de Conformidad de Servicios</h2>
+
+        <input type="hidden" value="@ViewData["codigos"]" na name="codigos" id="codigos" />
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Códigos</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Acta N° </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputActaNro" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Contrato N° </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputContrato" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Vigencia </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputVigencia" />
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <button id="btnBuscarTareas" type="button" class="btn btn-default btn-form-line">Buscar</button>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Proveedor: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputProveedor" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>RUC: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputRUC" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>N° Orden de Compra: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputOrdenCompra" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Importe: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputImporte" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Fecha Inicio: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputFechaIni" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Fecha Entrega: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputFechaEntre" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Solicitante: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputSolicitante" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Observaciones: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputObservaciones" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Tareas</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="tblTareas" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nro.</th>
+                                        <th>Título</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio USD</th>
+                                        <th>Total USD</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyResult"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Sub Total USD: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputSubTotal" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Imp. Renta (30%): </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputRenta" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Total USD: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputTotal" />
+                            </div>
+                            <br />
+                            <div class="col-xs-12 col-md-10 form-group">
+                                <label>
+                                    Mediante el presente documento, EL CLIENTE, declara recibir a su entera satisfacción el trabajo solicitado realizado pro EL PROVEEDOR,
+                                    con lo cual lo damos por finalizado.
+                                </label>
+                            </div>
+                            <br />
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Recibido por: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputRecibido" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Fecha Recepción: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputFechaRecep" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-md-10 form-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Datos de Pago</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Grupo Pagos: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <select class="form-control" id="selectGrupoPago">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>String: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <select class="form-control" id="selectString">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Tipo Documento: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <select class="form-control" id="selectTipoDoc">
+                                    <option value="0" selected> Seleccione </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>Condición Pago: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputCondicion" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <label>ID Anticipo: </label>
+                            </div>
+                            <div class="col-xs-6 col-md-3 form-group">
+                                <input class="form-control" type="text" id="inputIDAnticipo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="RegistrarActa" type="button" class="btn btn-default btn-actividad">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Guardar
+        </button>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Recursos/js/notie.js"></script>
+    <script src="~/Recursos/js/generarActa.js"></script>
+}
+

@@ -123,6 +123,13 @@ namespace TICE.Controllers
             ViewData["menu"] = "proyeccion";
             return View();
         }
+        public ActionResult GenerarActa(string codigos)
+        {
+            //ViewBag.Message = "Página de Actividades.";
+            ViewData["codigos"] = codigos;
+            ViewData["menu"] = "actas";
+            return View();
+        }
 
         public JsonResult Upload(string codigoCurso)
         {

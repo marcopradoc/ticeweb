@@ -9,7 +9,7 @@ function cargarModalidades() {
         success: function (data) {
             var strResult = '';
             $.each(data, function (index, data) {
-                strResult += "<option value = '" + data.codigo + "'>" + data.descripcion + "</option>";
+                strResult += "<option value = '" + data.codModalidad + "'>" + data.descripcion + "</option>";
             });
             $("#selectModalidad").append(strResult);
         },
@@ -62,7 +62,7 @@ function cargarTareas() {
 function WriteResponseActa(tareas) {
     var strResult = '';
     $.each(tareas, function (index, tarea) {
-        strResult += '<tr rel="' + tarea.codTarea + '">';
+        strResult += '<tr rel="' + tarea.codProveedor + '">';
         strResult += '<td>' + tarea.Curso + '</td>';
         strResult += '<td>' + tarea.Actividad + '</td>';
         strResult += '<td>' + tarea.Unidad + '</td>';
@@ -81,31 +81,35 @@ function WriteResponseActa(tareas) {
 }
 
 function bindTableResultActa() {
-    //$('#tblTareas tbody tr').on('click', function (event) {
-    //    if ($(this).hasClass('success')) {
-    //        $('input#tareaSelected').val('');
-    //        //$('#tblTareas').addClass('disabled');
-    //        $(this).removeClass('success');
-    //        //$('.btn-documento').addClass('disabled');
-    //    } else {
-    //        $('input#tareaSelected').val($(this).attr('rel'));
-    //        //$('#tblTareas').removeClass('disabled');
-    //        $(this).addClass('success').siblings().removeClass('success');
-    //        //$('.btn-documento').removeClass('disabled');
-    //    }
-    //});
     $("input[type='checkbox']").change(function (e) {
         if ($(this).is(":checked")) {
             $(this).closest('tr').addClass("success");
-            //$('input#tareaSelected').val($(this).closest('tr').attr('rel'));
-            //alert($(this).closest('tr').attr('rel'));
         } else {
             $(this).closest('tr').removeClass("success");
         }
     });
 }
 
+function irGenerarActa() {
+    var codTarea = '';
+    var codProveedor = '';
+    $('#tblTareas').find('tr').each(function () {
+        var row = $(this);
+        if (row.find('input[type="checkbox"]').is(':checked')) {
+            codTarea = codTarea + $(this).attr('rel') + '-';
+            codProveedor = $(this).attr('rel');
+        }
+    });
+
+    if (codTarea == '')
+        notie.alert(1, 'Debe seleccionar tareas antes de generar un acta', 2);
+    else
+        window.location.href = "/Home/GenerarActa/?codigos=" + codProveedor;
+    //window.location.href = "/Home/GenerarActa/?codigos=" + codTarea.substring(0, codTarea.length - 1);
+}
+
 $(document).ready(function () {
     cargarModalidades();
     $('#btnBuscarTareas').on('click', cargarTareas);
+    $('#btnGenerarActa').on('click', irGenerarActa);
 });
