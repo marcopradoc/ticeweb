@@ -27,7 +27,7 @@ function WriteResponse(tareas) {
         strResult += '<td>' + tarea.codTarea + '</td>';
         strResult += '<td> ' + tarea.titulo + '</td>';
         strResult += '<td>' + tarea.fechaCreacion + '</td>';
-        strResult += '<td>' + tarea.porcentajeCompletado + '</td>';
+        strResult += '<td>' + tarea.porcentajeAvance + '%</td>';
         strResult += '<td>ANA MARIA DIAZ SALINAS</td>';//asignado
         strResult += '<td>' + tarea.fechaInicio + '</td>';
         strResult += '<td>' + tarea.fechaFin + '</td>';
@@ -38,6 +38,9 @@ function WriteResponse(tareas) {
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalDelTarea" data-rel="' + tarea.codTarea + '">'
         strResult += '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
         strResult += '</button>'
+        strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalSearchTarea" data-rel="' + tarea.codTarea + '">'
+        strResult += '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>'
+        strResult += '</button>'
         strResult += '</td></tr>';
     });
     //strResult += "</table>";
@@ -47,6 +50,9 @@ function WriteResponse(tareas) {
 function bindTableResult() {
     $('#tblTareas tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
+            if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
             $('input#tareaSelected').val('');
             $('#tbDocumentos').addClass('disabled');
             $(this).removeClass('success');
@@ -280,6 +286,42 @@ function editarTarea(event) {
     }
 }
 
+function cargarEstadosTareas() {
+    jQuery.support.cors = true;
+    var codigoTarea = $('input#tareaSelected').val();
+    $.ajax({
+        url: 'http://localhost:49492/api/Tarea?codTarea=' + codigoTarea,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            WriteResponseEstados(data);
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    });
+}
+
+function WriteResponseEstados(tareas) {
+    var strResult = '';
+    //var strResult = "<table><th>Codigo</th><th>Curso</th><th>Fecha</th><th>Periodo</th><th>Modalidad</th><th>Docente</th><th>Estado</th>";
+    $.each(tareas, function (index, tarea) {
+        strResult += '<tr rel="' + tarea.codMaterialTrabajo + '">';
+        strResult += '<td>' + tarea.codMaterialTrabajo + '</td>';
+        strResult += '<td>' + tarea.descripcion + '</td>';
+        strResult += '<td> ' + tarea.estado + '</td>';
+        strResult += '</tr>';
+    });
+    //strResult += "</table>";
+    $("#tbodyResultEstados").html(strResult);
+}
+
+function bindSearchTarea() {
+    $('#myModalSearchTarea').on('show.bs.modal', function (event) {
+        cargarEstadosTareas();
+    });
+}
+
 $(document).ready(function () {
     $("#inputTareaFecIni").datepicker({ dateFormat: "dd/mm/yy" });
     $("#inputTareaFecFin").datepicker({ dateFormat: "dd/mm/yy" });
@@ -291,5 +333,5 @@ $(document).ready(function () {
     bindEditarTarea();
     bindNuevoDocumento();
     cargarActividadTareas();
-
+    bindSearchTarea();
 });

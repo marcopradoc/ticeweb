@@ -45,6 +45,10 @@ function WriteResponseTalleres(talleres) {
 function bindTableResultTalleres() {
     $('#tblTalleres tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
+
+            if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
             $('input#tallerSelected').val('');
             $(this).removeClass('success');
         } else {

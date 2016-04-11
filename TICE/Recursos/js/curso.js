@@ -133,7 +133,7 @@ function WriteResponse(cursos) {
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonCarga + ' data-toggle="modal" data-target="#myModalUpload" data-rel="' + cursos.Codigo + '">';
         strResult += '<span class="glyphicon glyphicon-upload" aria-hidden="true"></span></button>';
-        strResult += '<button type="button" class="btn btn-default btn-xs"' + estadoBotonDescarga + ' data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
+        strResult += '<button id = "botonD" type="button" class="fileDownloadPromise btn btn-default btn-xs"' + estadoBotonDescarga + ' data-toggle="modal" data-target="#myModalDownload" data-rel="' + cursos.Codigo + '">';
         strResult += '<span class="glyphicon glyphicon-download" aria-hidden="true"></span></button>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalCurso" data-rel="' + cursos.Codigo + '">';
         strResult += '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>';
@@ -147,6 +147,9 @@ function bindTableResult() {
         if ($(this).hasClass('success')) {
 
             if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
+            if (event.target.parentElement.className == "fileDownloadPromise btn btn-default btn-xs")
                 return;
 
             $('input#cursoSelected').val('');
@@ -353,6 +356,18 @@ function cargarSemanas() {
     })
 }
 
+function downloadURL(url) {
+    var hiddenIFrameID = 'hiddenDownloader',
+        iframe = document.getElementById(hiddenIFrameID);
+    if (iframe === null) {
+        iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    iframe.src = url;
+};
+
 $(document).ready(function () {
     $("#datepicker1").datepicker({ dateFormat: "dd/mm/yy" });
     $("#datepicker2").datepicker({ dateFormat: "dd/mm/yy" });
@@ -386,4 +401,10 @@ $(document).ready(function () {
         }
         return false;
     }
+    //botonD
+    //.fileDownloadPromise
+    $(document).on("click", ".fileDownloadPromise", function (e) {
+        var codigoCurso = $('input#inputActividadCursoCodigo').val();
+        downloadURL('http://localhost:6810/documentos/' + codigoCurso + '/documento.xls');
+    });
 });

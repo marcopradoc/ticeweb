@@ -136,7 +136,7 @@ namespace TICE.Controllers
                 System.IO.Stream fileContent = file.InputStream;
                 //To save file, use SaveAs method
                 System.IO.Directory.CreateDirectory(Server.MapPath("~/documentos/" + codigoCurso + "/"));
-                file.SaveAs(Server.MapPath("~/documentos/" + codigoCurso + "/") + fileName); //File will be saved in application root
+                file.SaveAs(Server.MapPath("~/documentos/" + codigoCurso + "/") + "documento.xls"); //File will be saved in application root
             }
             return Json("Se cargó el archivo correctamente");
         }

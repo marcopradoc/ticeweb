@@ -49,6 +49,10 @@ function WriteResponse(capas) {
 function bindTableResult() {
     $('#tblCapacitaciones tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
+
+            if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
             $('input#capaSelected').val('');
             $(this).removeClass('success');
             $('#txtCrearCapa').text('Crear Capacitacion');

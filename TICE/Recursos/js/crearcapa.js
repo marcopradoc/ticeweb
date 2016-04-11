@@ -104,7 +104,7 @@ function cargarCapacitacion() {
             success: function (data) {
                 $.each(data, function (index, capa) {
                     $('input#inputCapaNombre').val(capa.nombre);
-                    $('select#selectCapaPeriodo').val(capa.codPerido);
+                    $('select#selectCapaPeriodo').val(capa.codPeriodo);
                     $('textarea#textareaCapaDescripcion').val(capa.descripcion);
                     //$('input#inputCapaLugar').val(capa.lugar);
                     //$('input#inputCapaFechaCapa').val(capa.fechaCapacitacion);
@@ -159,7 +159,7 @@ $(document).ready(function () {
     });
     
     $('#btnCancelar').on('click', cancelar);
-    
-    cargarCapacitacion();
+
     cargarPeriodos();
+    cargarCapacitacion();
 });

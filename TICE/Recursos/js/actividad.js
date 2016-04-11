@@ -114,6 +114,9 @@ function cargarCursoActividades() {
 function bindTableResult() {
     $('#tblActividades tbody tr').on('click', function (event) {
         if ($(this).hasClass('success')) {
+            if (event.target.parentElement.className == "btn btn-default btn-xs")
+                return;
+
             $('input#actividadSelected').val('');
             $('#tbTareas').addClass('disabled');
             $(this).removeClass('success');
@@ -141,8 +144,8 @@ function WriteResponse(actividades) {
         strResult += '<td>' + actividad.fechaCreacion + '</td>';
         strResult += '<td>' + actividad.unidad + '</td>';
         strResult += '<td>' + actividad.semana + '</td>';
-        strResult += '<td> ' + actividad.titulo + '</td>';
-        strResult += '<td></td>';
+        strResult += '<td>' + actividad.titulo + '</td>';
+        strResult += '<td>' + actividad.porcentajeAvance + '%</td>';
         strResult += '<td>' + actividad.DescEstado + '</td>';
         strResult += '<td>';
         strResult += '<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalEditActividad" data-rel="' + actividad.codActividad + '">'

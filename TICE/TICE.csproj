@@ -213,7 +213,12 @@
     <Content Include="Recursos\js\actas.js" />
     <Content Include="Recursos\js\focus.js" />
     <Content Include="Recursos\js\horario.js" />
+    <Content Include="Recursos\js\jquery.fileDownload.js" />
     <Content Include="Recursos\js\proyeccion.js" />
+    <Content Include="Recursos\js\Support\jquery.gritter.min.js" />
+    <Content Include="Recursos\js\Support\shBrushJScript.js" />
+    <Content Include="Recursos\js\Support\shBrushXml.js" />
+    <Content Include="Recursos\js\Support\shCore.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
